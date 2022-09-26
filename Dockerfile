@@ -1,4 +1,4 @@
-FROM python:slim-bullseye as builder
+FROM python:slim-bullseye
 ENV DEBIAN_FRONTEND noninteractive
 
 # install dependencies
@@ -16,6 +16,7 @@ RUN dpkg --add-architecture armhf && \
         gcc-arm-linux-gnueabihf \
         libc6:armhf \
         libncurses5:armhf \
+        libsdl2-image-2.0-0:armhf \
         libstdc++6:armhf
 
 # clone box86 git repo
@@ -54,6 +55,7 @@ RUN dpkg --add-architecture armhf && \
         gcc-arm-linux-gnueabihf \
         libc6:armhf \
         libncurses5:armhf \
+        libsdl2-image-2.0-0:armhf \
         libstdc++6:armhf
 
 # copy box86 build from above and install in container
@@ -71,4 +73,3 @@ RUN apt-get -qq autoclean && \
     apt-get -qq autoremove && \
     apt-get -qq clean && \
     rm -rf /tmp/* /var/cache/*
-
